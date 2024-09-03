@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+    <constant name="struts.devMode" value="true"/>
+
+    <!-- Se agrega para internacionalización -->
+    <constant name="struts.custom.i18n.resources" value="global"/>
+    
+    <package name="vistas" namespace="/vistas" extends="struts-default">
+
+        <!--Los interceptores van al principio de un package-->
+        <interceptors>
+            <!-- Definiciones de interceptores... -->
+            <interceptor name="auditoria-interceptor" class="com.cst.struts.app.interceptors.AuditoriaInterceptor"/>
+            <!-- Puedes definir un interceptor-stack si lo necesitas -->
+            <interceptor-stack name="pila-interceptores">
+                <interceptor-ref name="auditoria-interceptor"/>
+                <!-- Otros interceptores si es necesario -->
+            </interceptor-stack>
+        </interceptors>
+
+        <action name="hola" class="com.cst.struts.app.model.HolaAction" method="execute">
+            <result name="success">/WEB-INF/vistas/hola.jsp</result>
+        </action>
+        <action name="listar-lenguajes" class="com.cst.struts.app.model.LenguajesAction" method="execute">
+            <result name="success">/WEB-INF/vistas/listar_lenguajes.jsp</result>
+        </action>
+        <action name="login-form" class="com.cst.struts.app.model.HolaAction" method="execute">
+            <result name="success">/WEB-INF/vistas/login_form.jsp</result>
+        </action>
+        <action name="login-action" class="com.cst.struts.app.model.LoginAction">
+            <result name="success">/WEB-INF/vistas/exito.jsp</result>
+            <result name="error">/WEB-INF/vistas/error.jsp</result>
+        </action>
+        <action name="hola-interceptor" class="com.cst.struts.app.model.HolaAction" method="execute">
+            <interceptor-ref name="pila-interceptores"/>
+            <result name="success">/WEB-INF/vistas/hola_interceptor.jsp</result>
+        </action>
+        <action name="ingresar-correo" class="com.cst.struts.app.model.HolaAction" method="execute">
+            <interceptor-ref name="pila-interceptores"/>
+            <result name="success">/WEB-INF/vistas/ingresar_correo.jsp</result>
+        </action>
+        <action name="value-stack-action" class="com.cst.struts.app.model.ValueStackTestAction">
+            <result name="success">/WEB-INF/vistas/mostrar_value_stack.jsp</result>
+        </action>
+        <action name="cargador-archivo" class="com.cst.struts.app.model.HolaAction">
+            <result name="success">/WEB-INF/vistas/cargar_archivo.jsp</result>
+        </action>
+        <action name="cargarArchivo" class="com.cst.struts.app.model.CargadorArchivoAction">
+            <result name="success">/WEB-INF/vistas/exito_archivo.jsp</result>
+            <result name="error">/WEB-INF/vistas/error_archivo.jsp</result>
+        </action>
+        <action name="login-usuario" class="com.cst.struts.app.model.HolaAction">
+            <result name="success">/WEB-INF/vistas/login_usuario.jsp</result>
+        </action>
+        <action name="autenticar-usuario" class="com.cst.struts.app.model.AutenticarUsuarioAction">
+            <result name="success">/WEB-INF/vistas/exito_login_usr.jsp</result>
+            <result name="error">/WEB-INF/vistas/error_login_usr.jsp</result>
+        </action>
+        <action name="listar-productos" class="com.cst.struts.app.model.ListaProductosAction">
+            <result name="success">/WEB-INF/vistas/lista_productos.jsp</result>
+            <result name="error">/WEB-INF/vistas/error_lista_productos.jsp</result>
+        </action>
+        <action name="mostrar-formulario-validar" class="com.cst.struts.app.model.HolaAction">
+            <result name="success">/WEB-INF/vistas/valida_formulario.jsp</result>
+        </action>
+        <action name="validar-formulario" class="com.cst.struts.app.model.ClienteAction" method="execute">
+            <result name="success">/WEB-INF/vistas/exito_formulario.jsp</result>
+            <result name="input">/WEB-INF/vistas/valida_formulario.jsp</result>
+        </action>
+        <!-- Internacionalizacion -->
+        <action name="locale" class="com.cst.struts.app.model.LocaleAction" method="execute">
+            <result name="success">/WEB-INF/vistas/internacionalizar.jsp</result>
+        </action>
+        <action name="internacionalizar-form" class="com.cst.struts.app.model.LocaleAction" method="execute">
+            <result name="success">/WEB-INF/vistas/exito_i18n.jsp</result>
+            <result name="input">/WEB-INF/vistas/internacionalizar.jsp</result>
+        </action>
+    </package>
+
+</struts>
