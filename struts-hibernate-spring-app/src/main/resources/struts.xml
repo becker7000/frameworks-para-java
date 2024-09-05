@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "https://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.custom.i18n.resources" value="persona"/>
+
+    <package name="basic-struts2" extends="struts-default">
+
+        <action name="index">
+            <result>/index.jsp</result>
+        </action>
+
+        <action name="editar" class="com.cst.frameworks.app.action.EditarAction" method="input">
+            <result name="input">/editar.jsp</result>
+        </action>
+
+        <action name="guardar" class="com.cst.frameworks.app.action.EditarAction" method="execute">
+            <result name="success">/gracias.jsp</result>
+        </action>
+
+        <!-- Acción para listar productos -->
+        <action name="listar-productos" class="com.cst.frameworks.app.action.ListarProductosAction">
+            <result name="success">/productos.jsp</result> <!-- La vista que mostrará la lista de productos -->
+            <result name="error">/error_productos.jsp</result> <!-- Vista para manejar errores -->
+        </action>
+
+    </package>
+
+</struts>
